@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsNumberString,
@@ -6,10 +7,18 @@ import {
 } from '@nestjs/class-validator';
 
 export class SendOtpAuthDto {
+  @ApiProperty({
+    type: String,
+    required: true,
+  })
   @IsNotEmpty()
   @IsString()
-  fullName: string;
+  username: string;
 
+  @ApiProperty({
+    type: String,
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumberString()
   @Length(10, 10)
