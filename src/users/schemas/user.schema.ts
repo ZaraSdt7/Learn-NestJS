@@ -38,5 +38,6 @@ export class User {
     set: (mobile: string) => phoneNumberNormalizer(mobile, '0'),
   })
   mobile: string;
+  
 }
 export const Userschema = SchemaFactory.createForClass(User);
