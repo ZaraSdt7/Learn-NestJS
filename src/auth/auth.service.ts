@@ -37,6 +37,7 @@ export class AuthService {
         statusCode: HttpStatus.CREATED,
         data: {
           accessToken: token,
+          user,
         },
       };
     } catch (error) {
@@ -64,6 +65,7 @@ export class AuthService {
         statusCode: HttpStatus.OK,
         data: {
           accessToken: token,
+          user,
         },
       };
     } catch (error) {
