@@ -40,7 +40,7 @@ export class AuthService {
         },
       };
     } catch (error) {
-      throw new error();
+      throw error;
     }
   }
 
@@ -67,7 +67,7 @@ export class AuthService {
         },
       };
     } catch (error) {
-      throw new error();
+      throw error;
     }
   }
 }

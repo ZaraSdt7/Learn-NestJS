@@ -3,7 +3,7 @@ import {
   phoneNumberNormalizer,
   phoneNumberValidator,
 } from '@persian-tools/persian-tools';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 // export type UserDocument = HydratedDocument<User>;
 export enum Role {
   ADMIN = 'admin',
@@ -22,8 +22,8 @@ export enum Role {
 })
 export class User extends Document {
   //unique name class
-  @Prop({ required: true, type: Types.ObjectId, ref: 'user' })
-  userID: string;
+  // @Prop({ required: true, type: Types.ObjectId, ref: 'user' })
+  // userID: string;
 
   @Prop({
     type: String,
@@ -49,7 +49,6 @@ export class User extends Document {
 
   @Prop({
     type: String,
-    required: [true, 'شماره تلفن الزامیست.'],
     unique: true,
     trim: true,
     validate: {
@@ -62,7 +61,6 @@ export class User extends Document {
 
   @Prop({
     type: String,
-    required: true,
   })
   email: string;
 
