@@ -32,7 +32,7 @@ async function bootstrap() {
   app.use(helmet());
 
   await app.listen(4000, () => {
-    console.log('Listen on http://localhost:4000');
+    console.log('Listen on http://localhost:4000/api');
   });
 }
 bootstrap();
