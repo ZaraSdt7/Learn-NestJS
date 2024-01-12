@@ -13,8 +13,8 @@ import { LoginUser } from './dto/login-auth.dto';
 export class AuthService {
   constructor(
     @InjectModel(User.name)
-    private readonly jwtservice: JwtService,
-    private readonly usermodel: Model<User>,
+    private usermodel: Model<User>,
+    private jwtservice: JwtService,
   ) {}
 
   async signup(signupdto: SignupUser): Promise<ResponseFormat<any>> {
