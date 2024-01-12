@@ -1,26 +1,73 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/login-auth.dto';
-import { UpdateAuthDto } from './dto/signup-auth.dto';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from 'src/users/schemas/user.schema';
+import { Model } from 'mongoose';
+import * as bcrypt from 'bcryptjs';
+import { SignupUser } from './dto/signup-auth.dto';
+import { ResponseFormat } from 'src/shared/interfaces/response.interface';
+import { ResponseMessages } from 'src/shared/constants/response-messages.constant';
+import { LoginUser } from './dto/login-auth.dto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    @InjectModel(User.name)
+    private readonly jwtservice: JwtService,
+    private readonly usermodel: Model<User>,
+  ) {}
+
+  async signup(signupdto: SignupUser): Promise<ResponseFormat<any>> {
+    try {
+      const { fullname, username, password } = signupdto;
+      const existuser = await this.usermodel.findOne({ username });
+      if (existuser) {
+        throw new UnauthorizedException(
+          ResponseMessages.USERNAME_ALREADY_EXISTED,
+        );
+      }
+      const hashpassword = await bcrypt.hash(password, 10);
+      const user = await this.usermodel.create({
+        ...signupdto,
+        fullname,
+        password: hashpassword,
+      });
+      const token = await this.jwtservice.sign({ id: user._id });
+      return {
+        statusCode: HttpStatus.CREATED,
+        data: {
+          accessToken: token,
+        },
+      };
+    } catch (error) {
+      throw new error();
+    }
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  async login(logindto: LoginUser): Promise<ResponseFormat<any>> {
+    try {
+      const { username, password } = logindto;
+      const user = await this.usermodel.findOne({ username });
+      if (!user) {
+        throw new UnauthorizedException(
+          ResponseMessages.INVALID_USERNAME_PASSWORD,
+        );
+      }
+      const ispassword = await bcrypt.compare(password, user.password);
+      if (!ispassword) {
+        throw new UnauthorizedException(
+          ResponseMessages.USERNAME_ALREADY_EXISTED,
+        );
+      }
+      const token = await this.jwtservice.sign({ id: user._id });
+      return {
+        statusCode: HttpStatus.OK,
+        data: {
+          accessToken: token,
+        },
+      };
+    } catch (error) {
+      throw new error();
+    }
   }
 }
