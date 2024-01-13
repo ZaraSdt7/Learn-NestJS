@@ -17,7 +17,7 @@ export class SignupUser {
     type: String,
     required: true,
     description: 'Insert username',
-    example: 'zara_sdt77',
+    example: 'zara_sdt72',
   })
   @IsNotEmpty()
   @IsString()
@@ -25,7 +25,6 @@ export class SignupUser {
 
   @ApiProperty({
     type: String,
-    required: true,
     description: 'Insert email',
     example: 'zara.sdt@gmail.com',
   })
@@ -36,9 +35,10 @@ export class SignupUser {
 
   @ApiProperty({
     type: String,
-    required: true,
+    required: false,
     description: 'Insert mobile',
-    example: '0936666222',
+    example: '09352652552',
+    // default: null,
   })
   @IsOptional()
   @IsString()

@@ -14,7 +14,7 @@ export class AuthService {
   constructor(
     @InjectModel(User.name)
     private readonly usermodel: Model<User>,
-    private readonly jwtservice: JwtService,
+    private jwtservice: JwtService,
   ) {}
 
   async signup(signupdto: SignupUser): Promise<ResponseFormat<any>> {
@@ -60,7 +60,7 @@ export class AuthService {
           ResponseMessages.USERNAME_ALREADY_EXISTED,
         );
       }
-      const token = await this.jwtservice.sign({ id: user._id });
+      const token = this.jwtservice.sign({ id: user._id });
       return {
         statusCode: HttpStatus.OK,
         data: {

@@ -3,6 +3,7 @@ import {
   phoneNumberNormalizer,
   phoneNumberValidator,
 } from '@persian-tools/persian-tools';
+
 import { Document } from 'mongoose';
 // export type UserDocument = HydratedDocument<User>;
 export enum Role {
@@ -27,7 +28,6 @@ export class User extends Document {
 
   @Prop({
     type: String,
-    maxlength: [20, 'نام نمی‌تواند بیشتر از 20 حرف باشد.'],
     trim: true,
     required: true,
   })
@@ -35,7 +35,6 @@ export class User extends Document {
 
   @Prop({
     type: String,
-    trim: true,
     required: true,
     unique: true,
   })
