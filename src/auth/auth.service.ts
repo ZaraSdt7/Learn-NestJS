@@ -19,7 +19,7 @@ export class AuthService {
 
   async signup(signupdto: SignupUser): Promise<ResponseFormat<any>> {
     try {
-      const { fullname, username, password } = signupdto;
+      const { fullname, username, password, mobile } = signupdto;
       const existuser = await this.usermodel.findOne({ username });
       if (existuser) {
         throw new UnauthorizedException(
@@ -30,6 +30,7 @@ export class AuthService {
       const user = await this.usermodel.create({
         username,
         fullname,
+        mobile,
         password: hashpassword,
       });
       const token = this.jwtservice.sign({ id: user._id });

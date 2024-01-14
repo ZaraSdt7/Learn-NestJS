@@ -4,8 +4,8 @@ import {
   phoneNumberValidator,
 } from '@persian-tools/persian-tools';
 
-import { Document } from 'mongoose';
-// export type UserDocument = HydratedDocument<User>;
+import { HydratedDocument } from 'mongoose';
+export type UserDocument = HydratedDocument<User>;
 export enum Role {
   ADMIN = 'admin',
   USER = 'user',
@@ -21,7 +21,7 @@ export enum Role {
     virtuals: true,
   },
 })
-export class User extends Document {
+export class User {
   //unique name class
   // @Prop({ required: true, type: Types.ObjectId, ref: 'user' })
   // userID: string;

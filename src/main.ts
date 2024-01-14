@@ -12,12 +12,12 @@ async function bootstrap() {
     .setDescription('API documentation Of Nest Project')
     .setVersion('1.0')
     .addTag('Nest')
-    // .addBearerAuth({
-    //   type: 'http',
-    //   scheme: 'bearer',
-    //   in: 'header',
-    //   name: 'Authorization',
-    // })
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      in: 'header',
+      name: 'Authorization',
+    })
     .build();
   const document = SwaggerModule.createDocument(app, options);
 

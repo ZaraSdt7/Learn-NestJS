@@ -31,11 +31,12 @@ export class UsersController {
     if (!req.user) {
       throw new UnauthorizedException(ResponseMessages.UNAUTHORIZED);
     }
+    const user = this.userservice.GetAllUser();
     delete req.user.password;
     return {
       statusCode: HttpStatus.OK,
       data: {
-        user: req.user,
+        user,
       },
     };
   }

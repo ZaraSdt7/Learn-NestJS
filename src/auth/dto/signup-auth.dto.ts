@@ -1,6 +1,12 @@
 import { IsNotEmpty } from '@nestjs/class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsOptional,
+  IsString,
+  MinLength,
+  ValidateIf,
+} from 'class-validator';
 
 export class SignupUser {
   @ApiProperty({
@@ -35,13 +41,15 @@ export class SignupUser {
 
   @ApiProperty({
     type: String,
+    required: true,
     description: 'Insert mobile',
     example: '09377775210',
     // default: null,
   })
-  @IsOptional()
+  @ValidateIf((o) => o.mobile !== null)
+  @IsNotEmpty()
   @IsString()
-  readonly mobile?: string;
+  readonly mobile: string;
 
   @ApiProperty({
     type: String,

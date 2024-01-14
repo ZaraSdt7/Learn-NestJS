@@ -1,5 +1,5 @@
 import {
-  ArgumentMetadata,
+  // ArgumentMetadata,
   BadRequestException,
   Injectable,
   PipeTransform,
@@ -9,7 +9,7 @@ import { ResponseMessages } from '../constants/response-messages.constant';
 
 @Injectable()
 export class ParseMongoIdPipe implements PipeTransform {
-  transform(value: string, metadata: ArgumentMetadata): Types.ObjectId {
+  transform(value: string): Types.ObjectId {
     if (!Types.ObjectId.isValid(value)) {
       throw new BadRequestException(ResponseMessages.INVALID_ID);
     }
