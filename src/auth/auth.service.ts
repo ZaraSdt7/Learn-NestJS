@@ -13,7 +13,7 @@ import { LoginUser } from './dto/login-auth.dto';
 export class AuthService {
   constructor(
     @InjectModel(User.name)
-    private readonly usermodel: Model<User>,
+    private usermodel: Model<User>,
     private jwtservice: JwtService,
   ) {}
 
@@ -41,7 +41,7 @@ export class AuthService {
         },
       };
     } catch (error) {
-      throw error;
+      throw error.message;
     }
   }
 
@@ -69,7 +69,7 @@ export class AuthService {
         },
       };
     } catch (error) {
-      throw error;
+      throw error.message;
     }
   }
 }

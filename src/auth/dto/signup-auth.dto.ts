@@ -31,18 +31,17 @@ export class SignupUser {
   @IsOptional()
   @IsString()
   @IsEmail()
-  readonly email: string;
+  readonly email?: string;
 
   @ApiProperty({
     type: String,
-    required: false,
     description: 'Insert mobile',
-    example: '09352652552',
+    example: '09377775210',
     // default: null,
   })
   @IsOptional()
   @IsString()
-  readonly mobile: string;
+  readonly mobile?: string;
 
   @ApiProperty({
     type: String,
