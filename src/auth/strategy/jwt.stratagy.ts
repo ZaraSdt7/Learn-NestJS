@@ -10,7 +10,7 @@ import { ResponseMessages } from 'src/shared/constants/response-messages.constan
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectModel(User.name)
-    private usermodel: Model<User>,
+    private readonly usermodel: Model<User>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

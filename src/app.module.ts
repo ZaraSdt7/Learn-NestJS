@@ -5,6 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MulterModule } from '@nestjs/platform-express';
 // import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
+import { BlogModule } from './blog/blog.module';
+import { CategoryModule } from './category/category.module';
 import configuration from './config/app.config';
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import configuration from './config/app.config';
     MulterModule.register({ dest: './uploads' }),
     AuthModule,
     UsersModule,
+    BlogModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],
