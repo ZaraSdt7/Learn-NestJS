@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 
 @Schema({
@@ -18,3 +18,6 @@ export class Category extends Document {
   })
   parent: mongoose.Types.ObjectId;
 }
+
+export type CategoryDocument = Category;
+export const CategorySchema = SchemaFactory.createForClass(Category);
