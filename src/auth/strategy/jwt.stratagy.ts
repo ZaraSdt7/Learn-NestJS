@@ -17,8 +17,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: process.env.TOKEN_JWT,
     });
   }
-  async validate(username: string): Promise<any> {
-    const users = await this.usermodel.find({ username });
+  async validate(payload: any) {
+    const { id } = payload;
+    const users = await this.usermodel.findById(id);
     if (!users) {
       throw new UnauthorizedException(ResponseMessages.UNAUTHORIZED);
     }
