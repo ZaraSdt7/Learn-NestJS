@@ -25,7 +25,7 @@ export class Blog extends Document {
     type: String,
     required: true,
   })
-  contact: string;
+  content: string;
 
   @Prop({
     type: mongoose.Types.ObjectId,
