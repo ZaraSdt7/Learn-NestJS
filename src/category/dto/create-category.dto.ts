@@ -16,7 +16,7 @@ export class CreateCategoryDto {
   @ApiProperty({
     description: 'The parent of category',
     type: String,
-    example: '64a01b1f0d95ead9c8ea82b6',
+    default: null,
   })
   @IsOptional()
   @IsMongoId()
