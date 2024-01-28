@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BlogModule } from './blog/blog.module';
 import { CategoryModule } from './category/category.module';
 import configuration from './config/app.config';
+import { UploadFileModule } from './file-uploads/upload.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,11 +17,12 @@ import configuration from './config/app.config';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
-    MulterModule.register({ dest: './uploads' }),
+    MulterModule.register({ dest: './file-uploads' }),
     AuthModule,
     UsersModule,
     BlogModule,
     CategoryModule,
+    UploadFileModule,
   ],
   controllers: [],
   providers: [],
