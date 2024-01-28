@@ -12,6 +12,6 @@ export class UploadService {
     if (!state.isDirectory()) {
       await promises.mkdir(path, { recursive: true });
     }
-    return file.filename;
+    return `File ${file.filename} successfully uploaded`;
   }
 }
