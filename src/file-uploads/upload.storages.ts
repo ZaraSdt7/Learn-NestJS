@@ -1,6 +1,6 @@
 import { promises } from 'fs';
 import { diskStorage } from 'multer';
-import path from 'path';
+import * as path from 'path';
 import {
   alphabetLetters,
   alphabetNumber,
@@ -10,14 +10,14 @@ import {
 export function Filestorage() {
   return diskStorage({
     destination: async function (req, file, cb) {
-      const path = `./file-upload/uploads`;
+      const path = './file-uploads/uploads';
       try {
         const state = await promises.stat(path);
         if (!state.isDirectory()) {
           await promises.mkdir(path);
         }
       } catch (error) {
-        await promises.mkdir(path);
+        await promises.mkdir(path, { recursive: true });
       } finally {
         cb(null, path);
       }

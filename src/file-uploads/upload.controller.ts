@@ -26,7 +26,7 @@ export class UploadFileController {
     summary: 'upload photo',
     description: ' this api method upload a photo',
   })
-  @ApiConsumes('multipart/formdata')
+  @ApiConsumes('multipart/form-data')
   @ApiFile('thumbnail')
   @Post('posts')
   @UseInterceptors(

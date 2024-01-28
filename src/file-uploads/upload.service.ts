@@ -7,10 +7,10 @@ export class UploadService {
   async uploadfile(file: Express.Multer.File) {
     if (!file) throw new BadRequestException(ResponseMessages.FILE_IS_REQUIRED);
     console.log(file);
-    const path = `./file-uploads/uploads`;
+    const path = './file-uploads/uploads';
     const state = await promises.stat(path);
     if (!state.isDirectory()) {
-      await promises.mkdir(path);
+      await promises.mkdir(path, { recursive: true });
     }
     return file.filename;
   }

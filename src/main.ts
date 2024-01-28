@@ -4,9 +4,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import * as compression from 'compression';
+import { NestExpressApplication } from '@nestjs/platform-express';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
-  app.useGlobalPipes(new ValidationPipe());
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.useStaticAssets('file-uploads', {
+    prefix: '/file-uploads/',
+  }),
+    app.useGlobalPipes(new ValidationPipe());
   const options = new DocumentBuilder()
     .setTitle('Nest Project')
     .setDescription('API documentation Of Nest Project')
