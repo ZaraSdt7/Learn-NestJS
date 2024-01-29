@@ -9,6 +9,7 @@ import { BlogModule } from './blog/blog.module';
 import { CategoryModule } from './category/category.module';
 import configuration from './config/app.config';
 import { UploadFileModule } from './file-uploads/upload.module';
+import { CommentsModule } from './comments/comments.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,6 +24,7 @@ import { UploadFileModule } from './file-uploads/upload.module';
     BlogModule,
     CategoryModule,
     UploadFileModule,
+    CommentsModule,
   ],
   controllers: [],
   providers: [],
