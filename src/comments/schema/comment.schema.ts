@@ -12,6 +12,12 @@ export class Comment extends Document {
   text: string;
 
   @Prop({
+    type: Boolean,
+    default: false,
+  })
+  flag: boolean;
+
+  @Prop({
     type: Types.ObjectId,
   })
   reply: string;
